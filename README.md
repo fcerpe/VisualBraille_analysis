@@ -1,88 +1,97 @@
-**Unit tests and coverage**
-
-[![](https://img.shields.io/badge/Octave-CI-blue?logo=Octave&logoColor=white)](https://github.com/Remi-gau/template_matlab_analysis/actions)
-![](https://github.com/Remi-gau/template_matlab_analysis/workflows/CI/badge.svg)
-
-[![codecov](https://codecov.io/gh/Remi-gau/template_matlab_analysis/branch/master/graph/badge.svg)](https://codecov.io/gh/Remi-gau/template_matlab_analysis)
-
-**Miss_hit linter**
-
-[![Build Status](https://travis-ci.com/Remi-gau/template_matlab_analysis.svg?branch=master)](https://travis-ci.com/Remi-gau/template_matlab_analysis)
-
-
-# Template repository for matlab analysis project
-
-## How to install and use this template
-
-### Install with Git
-
-1. Click the green button `Use this template`.
-
-1. Give a name to the repository you want to create.
-   Something short that contains the name of your experiment: `analysis_fMRI_FaceLocalizer`.
-
-1. Decide if you want this new repo to be public or private.
-
-1. Click on `Create repository from template`
-
-You now have a copy of the template on your Github account.
-You can then download the code and the pre-set dependencies like this.
-
-1. Click on green `Download` button and copy the `URL_to_your_repo` that is shown there.
-
-1. Open a terminal and type this:
+## Gun-Zipping all nifti files in a folder and subfolders
 
 ```bash
-git clone --recurse-submodules URL_to_your_repo
+find path_to_folder -type f -name '*.nii' -exec gzip "{}" \;
 ```
 
-This will set up everything automatically in your current directory.
+## Tips to run typical containers
 
-## Content
+Most headaches with docker commands come from making sure you pass the correct
+path to the container. Having the same folder structure should help you avoiding
+mistakes and allow to reuse the same commands.
 
-```bash
-├── .git
-│   ├── COMMIT_EDITMSG
-│   ├── FETCH_HEAD
-│   ├── HEAD
-│   ├── ORIG_HEAD
-│   ├── branches
-│   ├── config
-│   ├── description
-│   ├── hooks
-│   │   ├── pre-commit.sample
-│   │   └── pre-push.sample
-│   ├── ...
-│   └── ...
-├── .github  # where you put anything github related
-│   └── workflows # where you define your github actions
-│       └── moxunit.yml # a yaml file that defines a github action
-├── docs # sphynx based documentation
-├── lib # where you put the code from external libraries (mathworks website or other github repositories)
-│   └── README.md
-├── src # WHERE YOU PUT YOUR CODE
+Some examples below. Of course you may need to adapt the actual docker command
+to your needs.
+
+```
+├── code
 │   ├── README.md
-│   └── miss_hit.cfg
-├── tests # where you put your unit tests
-|   ├── README.md
-|   └── miss_hit.cfg
-├── LICENSE
-├── README.md
-├── .pre-commit-config.yaml
-├── requirements.txt # a simple environment for anything python related in this repo
-├── miss_hit.cfg # configuration file for the matlab miss hit linter
-└── initEnv.m # a .m file to set up your project (adds the right folder to the path)
+│   ├── deface.sh
+│   ├── run_fmriprep.sh
+│   └── run_mriqc.sh
+├── inputs
+│   └── raw
+│       ├──README
+│       ├──dataset_description.json
+│       ├── sub-01
+│       ├── sub-02
+│       ├── sub-03
+│       ├── sub-04
+│       ├── sub-05
+│       └── sub-06
+├── outputs
+│   └── derivatives
+└── sourcedata
 ```
 
-## Keeping your code stylish
+Go into the code folder.
 
-If you have python installed:
-
-```
-pip install -r requirements.txt
-pre-commit install
+```bash
+cd code
 ```
 
-## Testing your code
+And then run the bash commands below.
 
-## Continuous integration
+## Defacing all images
+
+Run the following to deface all participants at once.
+
+```bash
+bids_dir=$(pwd)/../inputs/raw
+
+docker run -i --rm \
+    -v $bids_dir:/bids_dataset \
+    peerherholz/bidsonym /bids_dataset group \
+    --deid quickshear \
+    --brainextraction bet \
+    --bet_frac 0.5
+```
+
+## MRIQC
+
+Run the following to deface all participants at once: all tasks and imaging
+modalities.
+
+```bash
+bids_dir=$(pwd)/../inputs/raw
+derivatives_dir=$(pwd)/../outputs/derivatives
+
+docker run -it --rm \
+    -v $bids_dir:/data:ro \
+    -v $derivatives_dir:/out \
+    poldracklab/mriqc:0.16.1 /data /out \
+    participant \
+    --verbose-reports
+```
+
+## fMRIprep
+
+For fmriprep
+
+```bash
+#update this to your participant label
+participants="001 002"
+
+code_dir=$(pwd)
+bids_dir=$(pwd)/../inputs/raw
+derivatives_dir=$(pwd)/../outputs/derivatives
+
+docker run -it --rm \
+    -v $code_dir:/code:ro \
+    -v $bids_dir:/data:ro \
+    -v $derivatives_dir:/out \
+    nipreps/fmriprep:20.2.6 /data /out \
+    participant --participant_label ${participants} \
+    --fs-license-file /code/license.txt \
+    --output-spaces T1w:res-native MNI152NLin2009cAsym:res-native
+```

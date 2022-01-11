@@ -17,9 +17,9 @@ end
 opt.groups = {''};
 % opt.subjects = {[]};
 %
-opt.subjects = {'001'};
+opt.subjects = {'001','002','003'};
 
-opt.taskName = 'visualLocalizer';
+opt.taskName = 'visualEventRelated';
 opt.verbosity = 1;
 
 opt.dir.raw = fullfile('C:\Users\filip\Documents\Gin\VisualBraille\analysis', 'inputs', 'raw');
@@ -27,10 +27,6 @@ opt.dir.raw = fullfile('C:\Users\filip\Documents\Gin\VisualBraille\analysis', 'i
 opt.dir.derivatives = fullfile(opt.dir.raw, '..', '..', 'outputs', 'derivatives');
 
 opt.pipeline.type = 'preproc';
-
-opt.taskName = 'visualLocalizer';
-
-opt.verbosity = 1;
 
 % The directory where the data are located
 % opt.dataDir = [];
@@ -40,22 +36,12 @@ opt.verbosity = 1;
 
 % If you use 'individual', then we stay in native space (that of the anat image)
 % set to 'MNI' to normalize data
-%opt.space = 'MNI';
+opt.space = 'MNI';
 
 % % specify the model file that contains the contrasts to compute
-% opt.model.file =  fullfile('C:\Users\filip\Documents\GitHub\VisualBraille_analysis', ...
-%                             'model', 'visbra-visualLocalizer_smdl.json');
-% 
-% % specify the result to compute
-% opt.result.Steps(1) = struct( ...
-%     'Level',  'subject', ...
-%     'Contrasts', struct( ...
-%     'Name', [], ...
-%     'Mask', false, ...
-%     'MC', 'FWE', ...
-%     'p', 0.05, ...
-%     'k', 0, ...
-%     'NIDM', true));
+% opt.model.file =  fullfile('C:\Users\filip\Documents\Gin\VisualBraille\analysis\code', ...
+%                             'model', 'model-visualLocalizer_smdl.json');
+
 
 %% DO NOT TOUCH
 opt = checkOptions(opt);

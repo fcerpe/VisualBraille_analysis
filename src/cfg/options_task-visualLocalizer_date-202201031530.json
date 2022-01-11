@@ -1,0 +1,170 @@
+{
+    "QA": {
+        "glm": {
+            "do": true
+        },
+        "func": {
+            "carpetPlot": true,
+            "Motion": "on",
+            "FD": "on",
+            "Voltera": "on",
+            "Globals": "on",
+            "Movie": "on",
+            "Basics": "on"
+        }
+    },
+    "anatReference": {
+        "type": "T1w",
+        "session": ""
+    },
+    "contrastList": [],
+    "dir": {
+        "derivatives": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives",
+        "input": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\inputs\\raw",
+        "jobs": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-preproc\\jobs\\visualLocalizer",
+        "output": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-preproc",
+        "preproc": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-preproc",
+        "raw": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\inputs\\raw",
+        "stats": ""
+    },
+    "dryRun": false,
+    "funcVoxelDims": [],
+    "fwhm": {
+        "func": 6,
+        "contrast": 6
+    },
+    "glm": {
+        "roibased": {
+            "do": false
+        }
+    },
+    "groups": [""],
+    "model": {
+        "designOnly": false,
+        "file": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\code\\model\\model-visualLocalizer_smdl.json"
+    },
+    "parallelize": {
+        "do": false,
+        "nbWorkers": 3,
+        "killOnExit": false
+    },
+    "pipeline": {
+        "name": "cpp_spm",
+        "type": "preproc"
+    },
+    "query": {
+        "modality": [
+            "anat",
+            "func"
+        ]
+    },
+    "realign": {
+        "useUnwarp": true
+    },
+    "result": {
+        "Nodes": {
+            "Level": "",
+            "Contrasts": {
+                "Name": "",
+                "useMask": false,
+                "MC": "FWE",
+                "p": 0.05,
+                "k": 0
+            },
+            "Output": {
+                "png": false,
+                "csv": false,
+                "thresh_spm": false,
+                "binary": false,
+                "montage": {
+                    "do": false,
+                    "slices": [],
+                    "orientation": "axial",
+                    "background": "C:\\Users\\filip\\Documents\\MATLAB\\spm12\\canonical\\avg152T1.nii,1"
+                },
+                "NIDM_results": false
+            }
+        },
+        "Steps": {
+            "Level": "subject",
+            "Contrasts": {
+                "Name": "french_gt_scrambled",
+                "useMask": false,
+                "MC": "none",
+                "p": 0.001,
+                "k": 0
+            },
+            "Output": {
+                "png": false,
+                "csv": false,
+                "thresh_spm": false,
+                "binary": false,
+                "montage": {
+                    "do": false,
+                    "slices": [],
+                    "orientation": "axial",
+                    "background": "C:\\Users\\filip\\Documents\\MATLAB\\spm12\\canonical\\avg152T1.nii,1"
+                },
+                "NIDM_results": false
+            }
+        }
+    },
+    "segment": {
+        "force": false
+    },
+    "skullstrip": {
+        "threshold": 0.75,
+        "mean": false
+    },
+    "space": ["individual"],
+    "stc": {
+        "referenceSlice": [],
+        "sliceOrder": [],
+        "skip": false
+    },
+    "subjects": [
+        "001",
+        "002",
+        "003"
+    ],
+    "taskName": ["visualLocalizer"],
+    "toolbox": {
+        "rsHRF": {
+            "vox_rsHRF": {
+                "Denoising": {
+                    "generic": [],
+                    "Detrend": 0,
+                    "BPF": [],
+                    "Despiking": 0,
+                    "which1st": 3
+                },
+                "HRFE": {
+                    "hrfm": 2,
+                    "hrflen": 32,
+                    "num_basis": null,
+                    "mdelay": [4,8],
+                    "cvi": 0,
+                    "fmri_t": 1,
+                    "fmri_t0": 1,
+                    "thr": 1,
+                    "localK": 2,
+                    "tmask": null,
+                    "hrfdeconv": 1
+                },
+                "rmoutlier": 0,
+                "connectivity": [],
+                "savedata": {
+                    "deconv_save": 0,
+                    "hrfmat_save": 1,
+                    "hrfnii_save": 1,
+                    "job_save": 0
+                },
+                "prefix": "deconv_"
+            }
+        }
+    },
+    "useBidsSchema": false,
+    "useFieldmaps": true,
+    "verbosity": 1,
+    "zeropad": 2
+}

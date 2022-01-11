@@ -7,7 +7,7 @@ clear;
 clc;
 
 warning('off');
-addpath(genpath('C:\Users\filip\Documents\MATLAB\spm12'));
+addpath(genpath('C:\Users\filip\Documents\MATLAB\spm12')); % genpath = subfolders
 addpath(genpath('C:\Users\filip\Documents\MATLAB\NIfTI_tools'));
 
 try
@@ -17,7 +17,7 @@ end
 
 opt = visbra_getOption();
 
-% reportBIDS(opt);
+reportBIDS(opt);
 
 bidsCopyInputFolder(opt);
 
@@ -44,4 +44,4 @@ bidsResliceTpmToFunc(opt);
 % opt.skullstrip.mean = 1;
 % mask = bidsWholeBrainFuncMask(opt);
 
-bidsSmoothing(opt);
+% bidsSmoothing(opt);
