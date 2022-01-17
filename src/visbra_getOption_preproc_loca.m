@@ -1,6 +1,6 @@
 % (C) Copyright 2020 Remi Gau, Marco Barilari
 
-function opt = visbra_getOption()
+function opt = visbra_getOption_preproc_loca()
 %
 % returns a structure that contains the options chosen by the user to run
 % slice timing correction, pre-processing, subject and group level analysis.
@@ -19,7 +19,7 @@ opt.groups = {''};
 %
 opt.subjects = {'001','002','003'};
 
-opt.taskName = 'visualEventRelated';
+opt.taskName = 'visualLocalizer';
 opt.verbosity = 1;
 
 opt.dir.raw = fullfile('C:\Users\filip\Documents\Gin\VisualBraille\analysis', 'inputs', 'raw');

@@ -19,26 +19,20 @@ checkDependencies(opt);
 reportBIDS(opt);
 bidsCopyInputFolder(opt);
 
-% In case you just want to run segmentation and skull stripping
-% Skull stripping is also included in 'bidsSpatialPrepro'
-% bidsSegmentSkullStrip(opt);
+% Smoothing to apply: change parameteres if you go for mvpa-rsa
+if strcmp (opt.taskName, 'visualEventRelated')
 
-% bidsSTC(opt);
-% 
-% bidsSpatialPrepro(opt);
-% 
-% % The following do not run on octave for now (because of spmup)
-% anatomicalQA(opt);
-% bidsResliceTpmToFunc(opt);
-% % functionalQA(opt);
-% 
-% % Smoothing to apply
-FWHM = 2;
+    opt.fwhm.func = 2;
+    opt.fwhm.contrast = 2;  
+end
+
 bidsSmoothing(opt);
 
 bidsFFX('specifyAndEstimate', opt);
 bidsFFX('contrasts', opt);
 bidsResults(opt);
+
+%% Group analysis
 
 bidsRFX('smoothContrasts', opt);
 bidsRFX('RFX', opt);

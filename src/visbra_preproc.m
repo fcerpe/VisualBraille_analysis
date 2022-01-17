@@ -44,4 +44,12 @@ bidsResliceTpmToFunc(opt);
 % opt.skullstrip.mean = 1;
 % mask = bidsWholeBrainFuncMask(opt);
 
-% bidsSmoothing(opt);
+if strcmp(opt.taskName, 'visualEventRelated')
+    
+    %set the smmothing to 2mm instead of 6 (default)
+    opt.fwhm.func = 2;
+    opt.fwhm.contrast = 2;
+    
+end
+
+bidsSmoothing(opt);

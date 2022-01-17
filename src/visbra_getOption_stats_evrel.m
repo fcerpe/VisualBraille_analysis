@@ -1,4 +1,4 @@
-function opt = visbra_getOption_stats()
+function opt = visbra_getOption_stats_evrel()
   %
   % returns a structure that contains the options chosen by the user to run
   % slice timing correction, pre-processing, FFX, RFX.
@@ -10,7 +10,7 @@ function opt = visbra_getOption_stats()
   opt.subjects = {'001','002','003'};
 
   % task to analyze
-  opt.taskName = 'visualLocalizer';
+  opt.taskName = 'visualEventRelated';
   opt.verbosity = 1;
   
   % The directory where the data are located
@@ -28,7 +28,7 @@ function opt = visbra_getOption_stats()
   opt.space = {'MNI'};
 
   opt.model.file = fullfile(fileparts(mfilename('fullpath')), ...
-                            'models', 'model-visualLocalizer_smdl.json');
+                            'models', 'model-visualEventRelated_smdl.json');
   % to add the hrf temporal derivative = [1 0]
   % to add the hrf temporal and dispersion derivative = [1 1]
   % opt.model.hrfDerivatives = [0 0];
@@ -46,19 +46,19 @@ function opt = visbra_getOption_stats()
   %    - 'FWE' is the defaut
   %    - 'FDR'
   %    - 'none'
-  opt.result.Nodes(1).Contrasts(1).Name = 'french_gt_scrambled';
-  opt.result.Nodes(1).Contrasts(1).MC =  'FWE';
-  opt.result.Nodes(1).Contrasts(1).p = 0.01;
+  opt.result.Nodes(1).Contrasts(1).Name = 'words_gt_blanks';
+  opt.result.Nodes(1).Contrasts(1).MC =  'none';
+  opt.result.Nodes(1).Contrasts(1).p = 0.001;
   opt.result.Nodes(1).Contrasts(1).k = 0;
   
-  opt.result.Nodes(1).Contrasts(2).Name = 'braille_gt_scrambled';
-  opt.result.Nodes(1).Contrasts(2).MC =  'FWE';
-  opt.result.Nodes(1).Contrasts(2).p = 0.01;
+  opt.result.Nodes(1).Contrasts(2).Name = 'braille_gt_french';
+  opt.result.Nodes(1).Contrasts(2).MC =  'none';
+  opt.result.Nodes(1).Contrasts(2).p = 0.001;
   opt.result.Nodes(1).Contrasts(2).k = 0;
   
-  opt.result.Nodes(1).Contrasts(3).Name = 'drawing_gt_scrambled';
-  opt.result.Nodes(1).Contrasts(3).MC =  'FWE';
-  opt.result.Nodes(1).Contrasts(3).p = 0.01;
+  opt.result.Nodes(1).Contrasts(3).Name = 'french_gt_braille';
+  opt.result.Nodes(1).Contrasts(3).MC =  'none';
+  opt.result.Nodes(1).Contrasts(3).p = 0.001;
   opt.result.Nodes(1).Contrasts(3).k = 0;
 
   % Specify how you want your output (all the following are on false by default)
@@ -69,7 +69,7 @@ function opt = visbra_getOption_stats()
 
   % MONTAGE FIGURE OPTIONS
   opt.result.Nodes(1).Output.montage.do = true();
-  opt.result.Nodes(1).Output.montage.slices = -0:2:16; % in mm
+  opt.result.Nodes(1).Output.montage.slices = -16:2:0; % in mm
   % axial is default 'sagittal', 'coronal'
   opt.result.Nodes(1).Output.montage.orientation = 'axial';
   % will use the MNI T1 template by default but the underlay image can be changed.
@@ -78,6 +78,10 @@ function opt = visbra_getOption_stats()
 
   opt.result.Nodes(1).Output.NIDM_results = true();
 
+%   % in GLM analysis of event related tasks, smoothing is 2mm.
+%   % so
+%   opt.query.desc = 'smth2';
+  
   %% DO NOT TOUCH
   opt = checkOptions(opt);
   saveOptions(opt);
