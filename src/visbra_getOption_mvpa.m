@@ -1,4 +1,4 @@
-function opt = visbra_getOption_stats_loca()
+function opt = visbra_getOption_stats_evrel()
   %
   % returns a structure that contains the options chosen by the user to run
   % slice timing correction, pre-processing, FFX, RFX.
@@ -10,7 +10,7 @@ function opt = visbra_getOption_stats_loca()
   opt.subjects = {'001','002','003'};
 
   % task to analyze
-  opt.taskName = 'viualLocalizer';
+  opt.taskName = 'visualEventRelated';
   opt.verbosity = 1;
   
   % The directory where the data are located
@@ -28,7 +28,7 @@ function opt = visbra_getOption_stats_loca()
   opt.space = {'MNI'};
 
   opt.model.file = fullfile(fileparts(mfilename('fullpath')), ...
-                            'models', 'model-visualLocalizer_smdl.json');
+                            'models', 'model-FrenchBrailleDecoding_smdl.json');
   % to add the hrf temporal derivative = [1 0]
   % to add the hrf temporal and dispersion derivative = [1 1]
   % opt.model.hrfDerivatives = [0 0];
@@ -46,25 +46,6 @@ function opt = visbra_getOption_stats_loca()
   %    - 'FWE' is the defaut
   %    - 'FDR'
   %    - 'none'
-  opt.result.Nodes(1).Contrasts(1).Name = 'french_gt_scrambled';
-  opt.result.Nodes(1).Contrasts(1).MC =  'none';
-  opt.result.Nodes(1).Contrasts(1).p = 0.001;
-  opt.result.Nodes(1).Contrasts(1).k = 0;
-  
-  opt.result.Nodes(1).Contrasts(2).Name = 'braille_gt_scrambled';
-  opt.result.Nodes(1).Contrasts(2).MC =  'none';
-  opt.result.Nodes(1).Contrasts(2).p = 0.001;
-  opt.result.Nodes(1).Contrasts(2).k = 0;
-  
-  opt.result.Nodes(1).Contrasts(3).Name = 'drawing_gt_scrambled';
-  opt.result.Nodes(1).Contrasts(3).MC =  'none';
-  opt.result.Nodes(1).Contrasts(3).p = 0.001;
-  opt.result.Nodes(1).Contrasts(3).k = 0;
-  
-  opt.result.Nodes(1).Contrasts(3).Name = 'french_gt_braille';
-  opt.result.Nodes(1).Contrasts(3).MC =  'none';
-  opt.result.Nodes(1).Contrasts(3).p = 0.001;
-  opt.result.Nodes(1).Contrasts(3).k = 0;
 
   % Specify how you want your output (all the following are on false by default)
   opt.result.Nodes(1).Output.png = true();

@@ -11,7 +11,7 @@ addpath(genpath('C:\Users\filip\Documents\MATLAB\NIfTI_tools'));
 % initEnv();
 
 %% Set options
-opt = visbra_getOption_stats();
+opt = visbra_getOption_stats_loca();
 
 checkDependencies(opt);
 

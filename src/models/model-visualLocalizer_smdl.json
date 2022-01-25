@@ -145,10 +145,10 @@
                     "Type": "t"
                 },
                 {
-                    "Name": "allFrench",
+                    "Name": "french_gt_braille",
                     "ConditionList": [
                         "trial_type.fw",
-                        "trial_type.sfw"
+                        "trial_type.bw"
                     ],
                     "Weights": [
                         0.5,
