@@ -1,15 +1,16 @@
 %% MVPA Analysis scirpt for VISual BRAille study.
 %
 %   Coming from CerenB\rhythmBlock_mvpa scripts on github
-%   And Fede's scripts
+%   + Fede's and Iqra's scripts
 
 clear;
 clc;
 
 %% Load options
+% 
 
 % options come from event related design, the one set up to do mvpa
-opt = visbra_getOption_mvpa();
+opt = mvpa_getOption();
 
 % add cpp repo
 run ../lib/CPP_SPM/initCppSpm.m;
@@ -18,7 +19,7 @@ warning('off');
 
 %% Run batches
 reportBIDS(opt);
-bidsCopyInputFolder(opt);
+bidsCopyRawFolder(opt);
 
 % slice time correction
 bidsSTC(opt);
@@ -31,19 +32,7 @@ bidsSpatialPrepro(opt);
 % bidsResliceTpmToFunc(opt);
 % functionalQA(opt);
 
-% smoothing first level
-opt.fwhm.func = 6;
-opt.fwhm.contrast = 6;  
-
-bidsSmoothing(opt);
-
-% subject level univariate
-bidsFFX('specifyAndEstimate', opt);
-bidsFFX('contrasts', opt);
-
-% visualise the results
-bidsResults(opt);
-
+%% smth = 6
 % group level univariate
 % conFWHM = 8;
 % bidsRFX('smoothContrasts', opt,funcFWHM, conFWHM);
@@ -54,30 +43,28 @@ bidsResults(opt);
 
 %% MVPA
 
-% SMOOTHING OF 0
-opt.fwhm.func = 0;
-opt.fwhm.contrast = 0;  
-    
-bidsSmoothing(opt);
+% %% SMOOTHING OF 0
+% funcFWHM = 0;
+%     
+% bidsSmoothing(funcFWHM, opt);
+% 
+% bidsFFX('specifyAndEstimate', opt, funcFWHM);
+% bidsFFX('contrasts', opt, funcFWHM);
+% 
+% bidsResults(opt, funcFWHM);
+% % % prep for mvpa
+% 
+% bidsConcatBetaTmaps(opt, funcFWHM, 0, 0);
 
-bidsFFX('specifyAndEstimate', opt);
-bidsFFX('contrasts', opt);
+%% SMOOTHING OF 2
+funcFWHM = 2; 
 
-bidsResults(opt);
-% % prep for mvpa
+bidsSmoothing(funcFWHM, opt);
 
-bidsConcatBetaTmaps(opt, 0, 0);
+bidsFFX('specifyAndEstimate', opt, funcFWHM);
+bidsFFX('contrasts', opt, funcFWHM);
 
-% SMOOTHING OF 2
-opt.fwhm.func = 2;
-opt.fwhm.contrast = 2;  
+bidsResults(opt, funcFWHM);
 
-bidsSmoothing(opt);
-
-bidsFFX('specifyAndEstimate', opt);
-bidsFFX('contrasts', opt);
-
-bidsResults(opt);
-
-bidsConcatBetaTmaps(opt, 0, 0);
+bidsConcatBetaTmaps(opt, funcFWHM, 0, 0);
 

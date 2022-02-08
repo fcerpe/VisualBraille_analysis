@@ -7,22 +7,19 @@
         "visualEventRelated"
       ]
   },
-  "Nodes": [
+  "Steps": [
     {
-      "Level": "Run",
-      "Name": "run_level",
+      "Level": "run",
       "Model": {
         "X": [
           "trial_type.french",
           "trial_type.braille",
-          "trial_type.blank",
           "trans_x", "trans_y", "trans_z", "rot_x", "rot_y", "rot_z"
         ]
       },
       "AutoContrasts": [
         "trial_type.french",
-        "trial_type.braille",
-        "trial_type.blank"]
+        "trial_type.braille"]
     }
   ]
 }

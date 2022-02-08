@@ -1,0 +1,103 @@
+{
+    "QA": {
+        "func": {
+            "Basics": "on",
+            "FD": "on",
+            "Globals": "on",
+            "Motion": "on",
+            "Movie": "on",
+            "Voltera": "on",
+            "carpetPlot": true
+        },
+        "glm": {
+            "do": true
+        }
+    },
+    "anatReference": {
+        "session": "",
+        "type": "T1w"
+    },
+    "contrastList": [],
+    "dataDir": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\inputs\\raw",
+    "derivativesDir": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-stats",
+    "dir": {
+        "derivatives": "",
+        "raw": "",
+        "stats": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-stats"
+    },
+    "funcVoxelDims": [2.6,2.6,2.6],
+    "glm": {
+        "QA": {
+            "do": true
+        },
+        "roibased": {
+            "do": false
+        }
+    },
+    "groups": [""],
+    "jobsDir": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-stats\\jobs\\FrenchBrailleDecoding",
+    "model": {
+        "file": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\code\\src\\models\\model-FrenchBrailleDecoding_smdl.json",
+        "hrfDerivatives": [0,0]
+    },
+    "parallelize": {
+        "do": true,
+        "killOnExit": true,
+        "nbWorkers": 3
+    },
+    "pipeline": {
+        "type": "stats"
+    },
+    "query": [],
+    "realign": {
+        "useUnwarp": true
+    },
+    "result": {
+        "Nodes": {
+            "Output": {
+                "NIDM_results": true
+            }
+        },
+        "Steps": {
+            "Contrasts": {
+                "MC": "none",
+                "Name": "french",
+                "k": 0,
+                "p": 0.001,
+                "useMask": false
+            },
+            "Level": "subject",
+            "Output": {
+                "NIDM_results": false,
+                "binary": true,
+                "csv": true,
+                "montage": {
+                    "background": "C:\\Program Files\\spm12\\canonical\\avg152T1.nii,1",
+                    "do": true,
+                    "orientation": "axial",
+                    "slices": [-16,-14,-12,-10,-8,-6,-4,-2,0]
+                },
+                "png": true,
+                "thresh_spm": true
+            }
+        }
+    },
+    "skullstrip": {
+        "mean": false,
+        "threshold": 0.75
+    },
+    "space": "MNI",
+    "stc": {
+        "referenceSlice": [],
+        "skip": false,
+        "sliceOrder": []
+    },
+    "subjects": [
+        "001",
+        "002",
+        "003"
+    ],
+    "taskName": "FrenchBrailleDecoding",
+    "useFieldmaps": true,
+    "zeropad": 2
+}

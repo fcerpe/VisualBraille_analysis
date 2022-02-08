@@ -7,11 +7,13 @@ function opt = visbra_getOption_stats_evrel()
 
   opt = [];
   
-  opt.subjects = {'001','002','003'};
+  opt.subjects = {'001'};
 
   % task to analyze
   opt.taskName = 'visualEventRelated';
   opt.verbosity = 1;
+  
+  opt.desc = 'glm';
   
   % The directory where the data are located
   WD = 'C:\Users\filip\Documents\Gin\VisualBraille\analysis';

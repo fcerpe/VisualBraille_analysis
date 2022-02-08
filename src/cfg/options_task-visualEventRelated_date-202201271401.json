@@ -1,0 +1,149 @@
+{
+    "QA": {
+        "glm": {
+            "do": true
+        },
+        "func": {
+            "carpetPlot": true,
+            "Motion": "on",
+            "FD": "on",
+            "Voltera": "on",
+            "Globals": "on",
+            "Movie": "on",
+            "Basics": "on"
+        }
+    },
+    "anatReference": {
+        "type": "T1w",
+        "session": ""
+    },
+    "contrastList": [],
+    "dataDir": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\inputs\\raw",
+    "derivativesDir": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-stats",
+    "dir": {
+        "input": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\code\\src",
+        "output": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\code\\src\\derivatives\\cpp_spm-stats",
+        "derivatives": "derivatives",
+        "raw": "",
+        "preproc": "",
+        "stats": "derivatives\\cpp_spm-stats",
+        "jobs": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\code\\src\\derivatives\\cpp_spm-stats\\jobs\\visualEventRelated"
+    },
+    "dryRun": false,
+    "funcVoxelDims": [2.6,2.6,2.6],
+    "fwhm": {
+        "func": 6,
+        "contrast": 6
+    },
+    "glm": {
+        "QA": {
+            "do": true
+        },
+        "roibased": {
+            "do": false
+        }
+    },
+    "groups": [""],
+    "jobsDir": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-stats\\jobs\\visualEventRelated",
+    "model": {
+        "file": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\code\\src\\models\\model-visualEventRelated_smdl.json",
+        "hrfDerivatives": [0,0]
+    },
+    "parallelize": {
+        "do": true,
+        "killOnExit": true,
+        "nbWorkers": 3
+    },
+    "pipeline": {
+        "name": "cpp_spm",
+        "type": "stats"
+    },
+    "query": {
+        "modality": [
+            "anat",
+            "func"
+        ]
+    },
+    "realign": {
+        "useUnwarp": true
+    },
+    "result": {
+        "Steps": {
+            "Contrasts": {
+                "MC": "none",
+                "Name": "french",
+                "k": 0,
+                "p": 0.001,
+                "useMask": false
+            },
+            "Level": "subject",
+            "Output": {
+                "NIDM_results": true,
+                "binary": true,
+                "csv": true,
+                "montage": {
+                    "background": "C:\\Program Files\\spm12\\canonical\\avg152T1.nii,1",
+                    "do": true,
+                    "orientation": "axial",
+                    "slices": [-16,-14,-12,-10,-8,-6,-4,-2,0]
+                },
+                "png": true,
+                "thresh_spm": true
+            }
+        }
+    },
+    "segment": {
+        "force": false
+    },
+    "skullstrip": {
+        "threshold": 0.75,
+        "mean": false
+    },
+    "space": ["MNI"],
+    "stc": {
+        "referenceSlice": [],
+        "sliceOrder": [],
+        "skip": false
+    },
+    "subjects": ["001"],
+    "taskName": "visualEventRelated",
+    "toolbox": {
+        "rsHRF": {
+            "vox_rsHRF": {
+                "Denoising": {
+                    "generic": [],
+                    "Detrend": 0,
+                    "BPF": [],
+                    "Despiking": 0,
+                    "which1st": 3
+                },
+                "HRFE": {
+                    "hrfm": 2,
+                    "hrflen": 32,
+                    "num_basis": null,
+                    "mdelay": [4,8],
+                    "cvi": 0,
+                    "fmri_t": 1,
+                    "fmri_t0": 1,
+                    "thr": 1,
+                    "localK": 2,
+                    "tmask": null,
+                    "hrfdeconv": 1
+                },
+                "rmoutlier": 0,
+                "connectivity": [],
+                "savedata": {
+                    "deconv_save": 0,
+                    "hrfmat_save": 1,
+                    "hrfnii_save": 1,
+                    "job_save": 0
+                },
+                "prefix": "deconv_"
+            }
+        }
+    },
+    "useBidsSchema": false,
+    "useFieldmaps": true,
+    "verbosity": 1,
+    "zeropad": 2
+}

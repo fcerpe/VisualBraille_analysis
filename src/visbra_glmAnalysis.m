@@ -11,7 +11,8 @@ addpath(genpath('C:\Users\filip\Documents\MATLAB\NIfTI_tools'));
 % initEnv();
 
 %% Set options
-opt = visbra_getOption_stats_loca();
+opt = stats_getOption_localizer();
+% opt = stats_getOption_evrel();
 
 checkDependencies(opt);
 
@@ -21,16 +22,16 @@ bidsCopyInputFolder(opt);
 
 % Smoothing to apply: change parameteres if you go for mvpa-rsa
 if strcmp (opt.taskName, 'visualEventRelated')
-
-    opt.fwhm.func = 2;
-    opt.fwhm.contrast = 2;  
+    funcFWHM = 2;
+else
+    funcFWHM = 6;
 end
 
-bidsSmoothing(opt);
+bidsSmoothing(funcFWHM, opt);
 
-bidsFFX('specifyAndEstimate', opt);
-bidsFFX('contrasts', opt);
-bidsResults(opt);
+bidsFFX('specifyAndEstimate', opt, funcFWHM);
+bidsFFX('contrasts', opt, funcFWHM);
+bidsResults(opt, funcFWHM);
 
 %% Group analysis
 
