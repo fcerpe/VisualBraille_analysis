@@ -1,4 +1,4 @@
-function opt = visbra_getOption_stats_loca()
+function opt = stats_getOption_localizer()
   %
   % returns a structure that contains the options chosen by the user to run
   % slice timing correction, pre-processing, FFX, RFX.
@@ -15,14 +15,10 @@ function opt = visbra_getOption_stats_loca()
   
   % The directory where the data are located
   WD = 'C:\Users\filip\Documents\Gin\VisualBraille\analysis';
-  
-  opt.dir.raw = fullfile(WD, 'inputs', 'raw');
-  opt.dir.derivatives = fullfile(WD, 'outputs', 'derivatives');
-  opt.dir.preproc = fullfile(opt.dir.derivatives, 'cpp_spm-preproc');
-  opt.dir.input = opt.dir.preproc;
-  opt.dir.roi = fullfile(opt.dir.derivatives, 'cpp_spm-roi');
-  opt.dir.stats = fullfile(opt.dir.derivatives, 'cpp_spm-stats');
 
+opt.dataDir = fullfile(WD, 'inputs', 'raw');
+
+opt.derivativesDir = fullfile(WD, 'outputs', 'derivatives', 'cpp_spm-stats');
   opt.pipeline.type = 'stats';
 
   opt.space = {'MNI'};

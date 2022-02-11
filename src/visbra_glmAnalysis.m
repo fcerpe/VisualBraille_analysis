@@ -11,14 +11,16 @@ addpath(genpath('C:\Users\filip\Documents\MATLAB\NIfTI_tools'));
 % initEnv();
 
 %% Set options
-opt = stats_getOption_localizer();
-% opt = stats_getOption_evrel();
+% Comment the one you're not using
+
+% opt = stats_getOption_localizer();
+opt = stats_getOption_evrel();
 
 checkDependencies(opt);
 
 %% Run batches
 reportBIDS(opt);
-bidsCopyInputFolder(opt);
+bidsCopyRawFolder(opt);
 
 % Smoothing to apply: change parameteres if you go for mvpa-rsa
 if strcmp (opt.taskName, 'visualEventRelated')

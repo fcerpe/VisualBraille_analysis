@@ -22,9 +22,11 @@ opt.subjects = {'001','002','003'};
 opt.taskName = 'visualLocalizer';
 opt.verbosity = 1;
 
-opt.dir.raw = fullfile('C:\Users\filip\Documents\Gin\VisualBraille\analysis', 'inputs', 'raw');
+WD = 'C:\Users\filip\Documents\Gin\VisualBraille\analysis';
 
-opt.dir.derivatives = fullfile(opt.dir.raw, '..', '..', 'outputs', 'derivatives');
+opt.dataDir = fullfile(WD, 'inputs', 'raw');
+
+opt.derivativesDir = fullfile(WD, 'outputs', 'derivatives', 'cpp_spm-preproc');
 
 opt.pipeline.type = 'preproc';
 

@@ -37,7 +37,7 @@ maskVoxel = calculateMaskSize(opt);
 
 % keep the minimun value of voxels in a ROI as ratio to keep (must be
 % constant)
-opt.mvpa.ratioToKeep = min(maskVoxel); %363;%157 for sub-001 and 392 for sub-002 % 100 150 250 350 420
+opt.mvpa.ratioToKeep = min(maskVoxel); %363; %157 for sub-001 and 392 for sub-002 % 100 150 250 350 420
 
 %% GO GET THAT ACCURACY!  
 

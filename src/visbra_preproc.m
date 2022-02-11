@@ -15,11 +15,11 @@ run ../lib/CPP_SPM/initCppSpm.m;
 catch
 end
 
-opt = visbra_getOption();
+opt = preproc_getOption_localizer();
 
 reportBIDS(opt);
 
-bidsCopyInputFolder(opt);
+bidsCopyRawFolder(opt);
 
 % In case you just want to run segmentation and skull stripping
 % NOTE: skull stripping is also included in 'bidsSpatialPrepro'
