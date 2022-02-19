@@ -10,10 +10,10 @@ warning('off');
 addpath(genpath('C:\Users\filip\Documents\MATLAB\spm12')); % genpath = subfolders
 addpath(genpath('C:\Users\filip\Documents\MATLAB\NIfTI_tools'));
 
-try
+
+%%
 run ../lib/CPP_SPM/initCppSpm.m;
-catch
-end
+
 
 opt = preproc_getOption_localizer();
 
@@ -44,6 +44,8 @@ bidsResliceTpmToFunc(opt);
 % opt.skullstrip.mean = 1;
 % mask = bidsWholeBrainFuncMask(opt);
 
+%%
+
 if strcmp(opt.taskName, 'visualEventRelated')
     
     %set the smmothing to 2mm instead of 6 (default)
@@ -52,4 +54,4 @@ if strcmp(opt.taskName, 'visualEventRelated')
     
 end
 
-bidsSmoothing(opt);
+bidsSmoothing(opt.fwhm.func, opt);

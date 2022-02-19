@@ -19,7 +19,7 @@ opt.groups = {''};
 %
 opt.subjects = {'001','002','003'};
 
-opt.taskName = 'visualLocalizer';
+opt.taskName = 'visualEventRelated';
 opt.verbosity = 1;
 
 WD = 'C:\Users\filip\Documents\Gin\VisualBraille\analysis';

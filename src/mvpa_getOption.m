@@ -19,7 +19,7 @@ opt.space = 'MNI'; % 'individual', 'MNI'
 
 % description to add to folder name, to distinguish from GLM (see other
 % script) 
-opt.desc = 'MVPA';
+opt.desc = 'Mvpa_singleWords';
 
 % I like chatty outputs 
 opt.verbosity = 1;
@@ -33,7 +33,7 @@ WD = 'C:\Users\filip\Documents\Gin\VisualBraille\analysis';
 
 opt.dataDir = fullfile(WD, 'inputs', 'raw');
 
-opt.derivativesDir = fullfile(WD, 'outputs', 'derivatives', 'cpp_spm-stats');
+opt.derivativesDir = fullfile(WD, 'outputs', 'derivatives', 'cpp_spm-preproc');
 
 opt.pathOutput = fullfile(WD, 'outputs', 'derivatives', 'cosmoMvpa');
 
@@ -42,13 +42,14 @@ opt.dir.derivatives = fullfile(opt.derivativesDir, 'cpp_spm-stats');
 
 % Suffix output directory for the saved jobs
 opt.jobsDir = fullfile(WD, 'outputs', 'derivatives', 'cpp_spm-stats', 'jobs', opt.taskName);
-opt.glm.QA.do = true;
+opt.glm.QA.do = false;
+opt.QA.glm.do = false;
 
 % multivariate
 opt.pipeline.type = 'stats';
 
 opt.model.file = fullfile(fileparts(mfilename('fullpath')), ...
-    'models', 'model-FrenchBrailleDecoding_smdl.json');
+    'models', 'model-FrenchBrailleDecoding_singleWords_smdl.json');
 
 % MASKS
 opt.maskPath = fullfile(WD, 'outputs', 'derivatives', 'cpp_spm-rois');
@@ -67,7 +68,7 @@ saveOptions(opt);
 %% univariate options to specify contrasts etc.
 
 opt.result.Steps(1) = returnDefaultResultsStructure();
-opt.result.Steps(1).Level = 'subject';
+opt.result.Steps(1).Level = 'run';
 
 % Specify how you want your output (all the following are on false by default)
 opt.result.Steps(1).Output.png = true();
@@ -103,7 +104,7 @@ opt.mvpa.nbTrialRepetition = 1;
 
 % cosmo options
 opt.mvpa.tool = 'cosmo';
-% opt.mvpa.normalization = 'zscore';
+opt.mvpa.normalization = 'zscore';
 opt.mvpa.child_classifier = @cosmo_classify_libsvm;
 opt.mvpa.feature_selector = @cosmo_anova_feature_selector;
 

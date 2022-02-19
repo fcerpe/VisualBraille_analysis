@@ -1,0 +1,109 @@
+{
+    "QA": {
+        "func": {
+            "Basics": "on",
+            "FD": "on",
+            "Globals": "on",
+            "Motion": "on",
+            "Movie": "on",
+            "Voltera": "on",
+            "carpetPlot": true
+        },
+        "glm": {
+            "do": true
+        }
+    },
+    "anatReference": {
+        "session": "",
+        "type": "T1w"
+    },
+    "contrastList": [],
+    "dataDir": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\inputs\\raw",
+    "derivativesDir": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm",
+    "desc": "GLM",
+    "dir": {
+        "derivatives": "",
+        "raw": "",
+        "stats": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-stats"
+    },
+    "funcVoxelDims": [],
+    "glm": {
+        "roibased": {
+            "do": false
+        }
+    },
+    "groups": [""],
+    "model": {
+        "file": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\code\\src\\models\\model-visualEventRelatedNEW_smdl.json",
+        "hrfDerivatives": [0,0]
+    },
+    "parallelize": {
+        "do": false,
+        "killOnExit": false,
+        "nbWorkers": 3
+    },
+    "pipeline": {
+        "type": "stats"
+    },
+    "query": [],
+    "realign": {
+        "useUnwarp": true
+    },
+    "result": {
+        "Steps": {
+            "Contrasts": [
+                {
+                    "MC": "none",
+                    "Name": "words_gt_blanks",
+                    "k": 0,
+                    "p": 0.001,
+                    "useMask": false
+                },
+                {
+                    "MC": "none",
+                    "Name": "braille_gt_french",
+                    "k": 0,
+                    "p": 0.001,
+                    "useMask": []
+                },
+                {
+                    "MC": "none",
+                    "Name": "french_gt_braille",
+                    "k": 0,
+                    "p": 0.001,
+                    "useMask": []
+                }
+            ],
+            "Level": "subject",
+            "Output": {
+                "NIDM_results": true,
+                "binary": true,
+                "csv": true,
+                "montage": {
+                    "background": "C:\\Users\\filip\\Documents\\MATLAB\\spm12\\canonical\\avg152T1.nii,1",
+                    "do": true,
+                    "orientation": "axial",
+                    "slices": [-16,-14,-12,-10,-8,-6,-4,-2,0]
+                },
+                "png": true,
+                "thresh_spm": true
+            }
+        }
+    },
+    "skullstrip": {
+        "mean": false,
+        "threshold": 0.75
+    },
+    "space": "MNI",
+    "stc": {
+        "referenceSlice": [],
+        "skip": false,
+        "sliceOrder": []
+    },
+    "subjects": ["001"],
+    "taskName": "visualEventRelated",
+    "useFieldmaps": true,
+    "verbosity": 1,
+    "zeropad": 2,
+    "jobsDir": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm\\JOBS\\visualEventRelated"
+}

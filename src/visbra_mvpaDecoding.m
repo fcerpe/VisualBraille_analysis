@@ -30,14 +30,15 @@ opt = mvpa_getOption();
 %% SET UP MASKS AND VOXELS 
 
 % a bit redundant, these steps are repeated in the accuracy functions.
-% It's useful at the beginning to understand the steps and adapt scripts to
+% It's useful at the beginning to understand the steps and adapt scripts.
+% Also, here we decide how many voxels are we considering
 
 % get how many voxels are active / significant in each ROI 
 maskVoxel = calculateMaskSize(opt);
 
 % keep the minimun value of voxels in a ROI as ratio to keep (must be
 % constant)
-opt.mvpa.ratioToKeep = min(maskVoxel); %363; %157 for sub-001 and 392 for sub-002 % 100 150 250 350 420
+opt.mvpa.ratioToKeep = min(maskVoxel); % 100 150 250 350 420
 
 %% GO GET THAT ACCURACY!  
 
@@ -46,8 +47,8 @@ opt.mvpa.ratioToKeep = min(maskVoxel); %363; %157 for sub-001 and 392 for sub-00
 % to distinguish between them
 mvpaWithin = calculateMvpaWithinModality(opt);
 
-% "Cross-modal" decoding: training on one script (french or braille), test
-% on the other
+%% "Cross-modal" decoding: training on one script (french or braille), test
+% train on braille, test on french. And viceversa
 mvpaCross = calculateMvpaCrossModal(opt);
   
 

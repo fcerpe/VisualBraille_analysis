@@ -1,0 +1,102 @@
+{
+    "QA": {
+        "func": {
+            "Basics": "on",
+            "FD": "on",
+            "Globals": "on",
+            "Motion": "on",
+            "Movie": "on",
+            "Voltera": "on",
+            "carpetPlot": true
+        },
+        "glm": {
+            "do": true
+        }
+    },
+    "anatReference": {
+        "session": "",
+        "type": "T1w"
+    },
+    "contrastList": [],
+    "dataDir": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\inputs\\raw",
+    "derivativesDir": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-preproc",
+    "desc": "Mvpa_singleWords",
+    "dir": {
+        "derivatives": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-preproc\\cpp_spm-stats",
+        "raw": "",
+        "stats": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-stats"
+    },
+    "funcVoxelDims": [2.6,2.6,2.6],
+    "glm": {
+        "QA": {
+            "do": false
+        },
+        "roibased": {
+            "do": false
+        }
+    },
+    "groups": [""],
+    "jobsDir": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-preproc\\JOBS\\visualEventRelated",
+    "maskPath": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cpp_spm-rois",
+    "model": {
+        "file": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\code\\src\\models\\model-FrenchBrailleDecoding_singleWords_smdl.json",
+        "hrfDerivatives": [0,0]
+    },
+    "parallelize": {
+        "do": false,
+        "killOnExit": true,
+        "nbWorkers": 1
+    },
+    "pathOutput": "C:\\Users\\filip\\Documents\\Gin\\VisualBraille\\analysis\\outputs\\derivatives\\cosmoMvpa",
+    "pipeline": {
+        "type": "stats"
+    },
+    "query": [],
+    "realign": {
+        "useUnwarp": true
+    },
+    "result": {
+        "Steps": {
+            "Contrasts": {
+                "MC": "FWE",
+                "Name": "",
+                "k": 0,
+                "p": 0.05,
+                "useMask": false
+            },
+            "Level": "",
+            "Output": {
+                "NIDM_results": false,
+                "binary": false,
+                "csv": false,
+                "montage": {
+                    "background": "C:\\Users\\filip\\Documents\\MATLAB\\spm12\\canonical\\avg152T1.nii,1",
+                    "do": false,
+                    "orientation": "axial",
+                    "slices": []
+                },
+                "png": false,
+                "thresh_spm": false
+            }
+        }
+    },
+    "skullstrip": {
+        "mean": false,
+        "threshold": 0.75
+    },
+    "space": "MNI",
+    "stc": {
+        "referenceSlice": [],
+        "skip": false,
+        "sliceOrder": []
+    },
+    "subjects": [
+        "001",
+        "002",
+        "003"
+    ],
+    "taskName": "visualEventRelated",
+    "useFieldmaps": true,
+    "verbosity": 1,
+    "zeropad": 2
+}

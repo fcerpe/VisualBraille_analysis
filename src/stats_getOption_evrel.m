@@ -1,4 +1,4 @@
-function opt = visbra_getOption_stats_evrel()
+function opt = stats_getOption_evrel()
   %
   % returns a structure that contains the options chosen by the user to run
   % slice timing correction, pre-processing, FFX, RFX.
@@ -13,14 +13,13 @@ function opt = visbra_getOption_stats_evrel()
   opt.taskName = 'visualEventRelated';
   opt.verbosity = 1;
   
-  opt.desc = 'GLM';
+  opt.desc = 'GLMsingleWords';
   
   % The directory where the data are located
   WD = 'C:\Users\filip\Documents\Gin\VisualBraille\analysis';
   
   opt.dataDir = fullfile(WD, 'inputs', 'raw');
-  opt.derivativesDir = fullfile(WD, 'outputs', 'derivatives');
-  
+  opt.derivativesDir = fullfile(WD, 'outputs', 'derivatives', 'cpp_spm-preproc');
 %   opt.dir.preproc = fullfile(opt.dir.derivatives, 'cpp_spm-preproc');
 %   opt.dir.input = opt.dir.preproc;
 %   opt.dir.roi = fullfile(opt.dir.derivatives, 'cpp_spm-roi');
@@ -28,19 +27,20 @@ function opt = visbra_getOption_stats_evrel()
 
   opt.pipeline.type = 'stats';
 
-  opt.space = {'MNI'};
+  opt.space = 'MNI';
 
   opt.model.file = fullfile(fileparts(mfilename('fullpath')), ...
-                            'models', 'model-visualEventRelatedNEW_smdl.json');
+                            'models', 'model-FrenchBrailleDecoding_singleWords_smdl.json');
   % to add the hrf temporal derivative = [1 0]
   % to add the hrf temporal and dispersion derivative = [1 1]
   % opt.model.hrfDerivatives = [0 0];
 
+  opt.QA.glm.do = false;
   
   % Specify the result to compute
   opt.result.Steps(1) = returnDefaultResultsStructure();
 
-  opt.result.Steps(1).Level = 'subject';
+  opt.result.Steps(1).Level = 'run';
 
   % For each contrats, you can adapt:
   %  - voxel level (p)
