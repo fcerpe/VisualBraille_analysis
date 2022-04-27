@@ -19,7 +19,7 @@ opt.space = 'MNI'; % 'individual', 'MNI'
 
 % description to add to folder name, to distinguish from GLM (see other
 % script) 
-opt.desc = 'Mvpa_singleWords';
+opt.desc = 'Mvpa_1word1beta';
 
 % I like chatty outputs 
 opt.verbosity = 1;
@@ -49,7 +49,7 @@ opt.QA.glm.do = false;
 opt.pipeline.type = 'stats';
 
 opt.model.file = fullfile(fileparts(mfilename('fullpath')), ...
-    'models', 'model-FrenchBrailleDecoding_singleWords_smdl.json');
+    'models', 'model-FrenchBrailleDecoding_singleBetas_smdl.json');
 
 % MASKS
 opt.maskPath = fullfile(WD, 'outputs', 'derivatives', 'cpp_spm-rois');
@@ -100,7 +100,7 @@ opt.mvpa.map4D = {'beta', 't_maps'};
 
 % design info
 opt.mvpa.nbRun = 8;
-opt.mvpa.nbTrialRepetition = 1;
+opt.mvpa.nbTrialRepetition = 1; % change accordingly: 
 
 % cosmo options
 opt.mvpa.tool = 'cosmo';

@@ -45,11 +45,11 @@ opt.mvpa.ratioToKeep = min(maskVoxel); % 100 150 250 350 420
 % Within modality (maybe I need a more fitting name):
 % training set and test set both contain french and braille stimuli, learn
 % to distinguish between them
-mvpaWithin = calculateMvpaWithinModality(opt);
+mvpaWithin = calculateMvpaWithinModality(opt,'words');
 
 %% "Cross-modal" decoding: training on one script (french or braille), test
 % train on braille, test on french. And viceversa
-mvpaCross = calculateMvpaCrossModal(opt);
+% mvpaCross = calculateMvpaCrossModal(opt);
   
 
 

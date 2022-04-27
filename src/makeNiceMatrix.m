@@ -6,6 +6,7 @@
 %
 % 1. dividi table in struct
 
+
 mvpa = struct;
 % sub-001
 mvpa.raw.sub001.vwfa = struct;  mvpa.raw.sub001.locL = struct;  mvpa.raw.sub001.pfsL = struct;
@@ -97,13 +98,13 @@ for i = 1:240:7200
                 'br-balcon', 'br-vallon', 'br-cochon', 'br-faucon', ...
                 'br-chalet', 'br-sommet', 'br-poulet', 'br-roquet'};
     name = pathString{1}([10 15]) + "_" + pathString{1}(17:20) + "_" + string(accu(i).image(1)) + "_htmp";
-    figure;
-    eval(['mvpa.' char(name) ' = heatmap(lab_mvpa,lab_mvpa,accuMat,''CellLabelColor'',''none'',''Colormap'',parula);']);
-    title = pathString{1}([10 15]) + "-" + pathString{1}(17:20) + "-" + string(accu(i).image(1));
-    eval(['mvpa.' char(name) '.Title = ''' char(title) ''';']);
+%     figure;
+%     eval(['mvpa.' char(name) ' = heatmap(lab_mvpa,lab_mvpa,accuMat,''CellLabelColor'',''none'',''Colormap'',parula);']);
+%     title = pathString{1}([10 15]) + "-" + pathString{1}(17:20) + "-" + string(accu(i).image(1));
+%     eval(['mvpa.' char(name) '.Title = ''' char(title) ''';']);
 end
 
-
+save('FRBRdecoding_singeWords.mat','accu','mvpa');
 
 
 

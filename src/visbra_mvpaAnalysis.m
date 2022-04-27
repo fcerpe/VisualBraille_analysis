@@ -23,7 +23,11 @@ funcFWHM = 2;
 
 % bidsSmoothing(funcFWHM, opt);
 
-bidsFFX('specifyAndEstimate', opt, funcFWHM);
+if iscell(opt.space)
+    opt.space = opt.space{1};
+end
+% bidsFFX('specifyAndEstimate', opt, funcFWHM);
+
 bidsFFX('contrasts', opt, funcFWHM);
 
 % bidsResults(opt, funcFWHM);

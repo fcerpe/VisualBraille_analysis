@@ -1,4 +1,4 @@
-function accu = calculateMvpaWithinModality(opt)
+function accu = calculateMvpaWithinModality(opt, condition)
 
 % main function which loops through masks and subjects to calculate the
 % decoding accuracies for given conditions.
@@ -12,21 +12,20 @@ funcFWHM = opt.funcFWHM;
 % choose masks to be used
 opt = chooseMask(opt);
 
+% fn = getSavename(condition); 
+
 % set output folder/name
 savefileMat = fullfile(opt.pathOutput, ...
-    [opt.taskName, 'Fr-v-Br_singleWords', '_s', num2str(opt.funcFWHM), '_ratio', num2str(opt.mvpa.ratioToKeep), '.mat']);
+    [opt.taskName, '_', char(condition), '_s', num2str(opt.funcFWHM), '_ratio', num2str(opt.mvpa.ratioToKeep), '.mat']);
 
 savefileCsv = fullfile(opt.pathOutput, ...
-    [opt.taskName, 'Fr-v-Br_singleWords', '_s', num2str(opt.funcFWHM), '_ratio', num2str(opt.mvpa.ratioToKeep), '.csv']);
+    [opt.taskName, '_', char(condition), '_s', num2str(opt.funcFWHM), '_ratio', num2str(opt.mvpa.ratioToKeep), '.csv']);
 
 %% MVPA options
 
 % set cosmo mvpa structure
-condLabelNb = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
-condLabelName = {'fr_ba', 'fr_va', 'fr_co', 'fr_fa', ...
-                 'fr_ch', 'fr_so', 'fr_po', 'fr_ro', ...
-                 'br_ba', 'br_va', 'br_co', 'br_fa', ...
-                 'br_ch', 'br_so', 'br_po', 'br_ro'};
+condLabelNb = getConditionIDs(opt, condition);
+condLabelName = getConditionNames('all_betas'); % sweep the mess under the rug
 
 decodingCondition = getConditionList(); % just to hide the huge amount of conditions
 
@@ -76,8 +75,9 @@ for iSub = 1:numel(opt.subjects)
             for iCon = 1:length(condLabelNb) % loop once to get which is #1
                 for iDec = 1:length(condLabelNb) % loop again for #2
                     
-                    % avoid self-decoding
-                    if iCon == iDec
+                    % avoid self-decoding and empty decodings (in the case
+                    % of a single script
+                    if condLabelNb(iCon) == condLabelNb(iDec) || condLabelNb(iCon) == 0 || condLabelNb(iDec) == 0
                         continue;
                     end
                    
@@ -93,7 +93,13 @@ for iSub = 1:numel(opt.subjects)
                     
                     % slice the ds according to your targers (choose your
                     % train-test conditions)
-                    ds = cosmo_slice(ds, ds.sa.targets == condLabelNb(iCon) | ds.sa.targets == condLabelNb(iDec));
+                    if strcmp(condition, 'words') || strcmp(condition, 'br_words')
+                        % we are doing deconding on a single word
+                        ds = cosmo_slice(ds, ds.sa.targets == condLabelNb(iCon) | ds.sa.targets == condLabelNb(iDec));
+                        
+                    else % other conditions (phono, sem) with a single decoding
+                        ds = cosmo_slice(ds, ds.sa.targets == 1 | ds.sa.targets == 2);
+                    end
                     
                     % remove constant features
                     ds = cosmo_remove_useless_data(ds);
@@ -129,7 +135,7 @@ for iSub = 1:numel(opt.subjects)
                     accu(count).prediction = pred;
                     accu(count).imagePath = image;
                     %         accu(count).roiSource = roiSource;
-                    accu(count).decodingCondition = decodingCondition{decID};
+                    accu(count).decodingCondition = decodingCondition{1};
                     
                     %% PERMUTATION PART
                     if opt.mvpa.permutate  == 1
@@ -188,9 +194,42 @@ function ds = setCosmoStructure(opt, ds, condLabelNb, condLabelName)
 % sets up the target, chunk, labels by stimuli condition labels, runs,
 % number labels.
 
+% Modified to include different analyses and chunks.
+% Works for decoding of single words (16 betas per run)
+% not (yet) for single betas (64 per run)
+
+% switch condition 
+%     
+%     case 'words' % each single word v. all the others (pair-wise)
+%         betasPerCondition = opt.mvpa.nbTrialRepetition;
+%         conditionPerRun = length(condLabelNb);
+%         betasPerRun = betasPerCondition * conditionPerRun;
+%         
+%         chunks = repmat((1:nbRun)', 1, betasPerRun);
+%         chunks = chunks(:);
+%         
+%         targets = repmat(condLabelNb', 1, nbRun)';
+%         targets = targets(:);
+%         targets = repmat(targets, betasPerCondition, 1);
+%         
+%         condLabelName = repmat(condLabelName', 1, nbRun)';
+%         condLabelName = condLabelName(:);
+%         condLabelName = repmat(condLabelName, betasPerCondition, 1);
+% 
+% 
+%     case 'semantics' % living v. non-living
+%         
+%         
+%         
+%         
+%     case 'phonology' % -on v. -et
+%         
+%     case 'format' % french v. braille
+% 
+% end
 % design info from opt
 nbRun = opt.mvpa.nbRun;
-betasPerCondition = opt.mvpa.nbTrialRepetition;
+betasPerCondition = opt.mvpa.nbTrialRepetition; % trial is given by trial_type
 
 % chunk (runs), target (condition), labels (condition names)
 conditionPerRun = length(condLabelNb);
